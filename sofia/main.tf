@@ -23,13 +23,13 @@ resource "aws_instance" "consul1" {
 
   provisioner "file" {
     source      = "scripts"
-    destination = "/var/tmp"
+    destination = "/tmp"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /var/tmp/scripts/start_consul.sh",
-      "sudo bash /var/tmp/scripts/keyvalue.sh",
+      "sudo bash /tmp/scripts/start_consul.sh",
+      "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
 }
@@ -54,13 +54,13 @@ resource "aws_instance" "consul2" {
 
   provisioner "file" {
     source      = "scripts"
-    destination = "/var/tmp"
+    destination = "/tmp"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /var/tmp/scripts/start_consul.sh",
-      "sudo bash /var/tmp/scripts/keyvalue.sh",
+      "sudo bash /tmp/scripts/start_consul.sh",
+      "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
 }
@@ -90,8 +90,8 @@ resource "aws_instance" "consul3" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /var/tmp/scripts/start_consul.sh",
-      "sudo bash /var/tmp/scripts/keyvalue.sh",
+      "sudo bash /tmp/scripts/start_consul.sh",
+      "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
 }
@@ -116,15 +116,15 @@ resource "aws_instance" "client1" {
 
   provisioner "file" {
     source      = "scripts"
-    destination = "/var/tmp"
+    destination = "/tmp"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /var/tmp/scripts/start_consul.sh",
-      "sudo bash /var/tmp/scripts/consul-template.sh",
-      "sudo bash /var/tmp/scripts/conf-dnsmasq.sh",
-      "sudo bash /var/tmp/scripts/check_nginx.sh",
+      "sudo bash /tmp/scripts/start_consul.sh",
+      "sudo bash /tmp/scripts/consul-template.sh",
+      "sudo bash /tmp/scripts/conf-dnsmasq.sh",
+      "sudo bash /tmp/scripts/check_nginx.sh",
     ]
   }
 }
