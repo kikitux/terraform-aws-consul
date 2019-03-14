@@ -22,7 +22,7 @@ resource "aws_instance" "consul1" {
   }
 
   provisioner "file" {
-    source      = "${path.module}scripts"
+    source      = "https://github.com/denislavdenov/terraform-aws-consul/tree/master/sofia/scripts"
     destination = "/var/tmp"
   }
 
@@ -53,7 +53,7 @@ resource "aws_instance" "consul2" {
   }
 
   provisioner "file" {
-    source      = "${path.module}scripts"
+    source      = "https://github.com/denislavdenov/terraform-aws-consul/tree/master/sofia/scripts"
     destination = "/var/tmp"
   }
 
@@ -84,7 +84,7 @@ resource "aws_instance" "consul3" {
   }
 
   provisioner "file" {
-    source      = "${path.module}scripts"
+    source      = "https://github.com/denislavdenov/terraform-aws-consul/tree/master/sofia/scripts"
     destination = "/tmp"
   }
 
@@ -115,7 +115,7 @@ resource "aws_instance" "client1" {
   }
 
   provisioner "file" {
-    source      = "${path.module}scripts"
+    source      = "https://github.com/denislavdenov/terraform-aws-consul/tree/master/sofia/scripts"
     destination = "/var/tmp"
   }
 
