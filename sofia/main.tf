@@ -6,6 +6,7 @@ resource "aws_key_pair" "key" {
 resource "aws_instance" "consul1" {
   ami                         = "${var.ami["server"]}"
   instance_type               = "${var.instance_type}"
+  subnet_id                   = "${var.subnet_id}"
   key_name                    = "${aws_key_pair.key.id}"
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.11"
@@ -36,6 +37,7 @@ resource "aws_instance" "consul1" {
 resource "aws_instance" "consul2" {
   ami                         = "${var.ami["server"]}"
   instance_type               = "${var.instance_type}"
+  subnet_id                   = "${var.subnet_id}"
   key_name                    = "${aws_key_pair.key.id}"
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.12"
@@ -66,6 +68,7 @@ resource "aws_instance" "consul2" {
 resource "aws_instance" "consul3" {
   ami                         = "${var.ami["server"]}"
   instance_type               = "${var.instance_type}"
+  subnet_id                   = "${var.subnet_id}"
   key_name                    = "${aws_key_pair.key.id}"
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.13"
@@ -96,6 +99,7 @@ resource "aws_instance" "consul3" {
 resource "aws_instance" "client1" {
   ami                         = "${var.ami["client"]}"
   instance_type               = "${var.instance_type}"
+  subnet_id                   = "${var.subnet_id}"
   key_name                    = "${aws_key_pair.key.id}"
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.17.11"
