@@ -4,7 +4,7 @@ resource "aws_key_pair" "key" {
 }
 
 data "template_file" "var" {
-  template = "${file("var.sh")}"
+  template = "${file("${path.module}/scripts/start_consul.sh")}"
   depends_on = ["aws_key_pair.key"]
 
   vars = {
@@ -21,7 +21,6 @@ resource "aws_instance" "consul1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.11"
   associate_public_ip_address = true
-  user_data                   = "${data.template_file.var.rendered}"
   
 
   tags {
@@ -40,7 +39,10 @@ resource "aws_instance" "consul1" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /tmp/scripts/start_consul.sh",
+      "cat <<EOF > /tmp/scripts/test.sh",
+      "${data.template_file.var.rendered}",
+      "EOF",
+      "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
@@ -54,7 +56,6 @@ resource "aws_instance" "consul2" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.12"
   associate_public_ip_address = true
-  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-server2"
@@ -72,7 +73,10 @@ resource "aws_instance" "consul2" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /tmp/scripts/start_consul.sh",
+      "cat <<EOF > /tmp/scripts/test.sh",
+      "${data.template_file.var.rendered}",
+      "EOF",
+      "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
@@ -86,7 +90,6 @@ resource "aws_instance" "consul3" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.13"
   associate_public_ip_address = true
-  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-server3"
@@ -104,7 +107,10 @@ resource "aws_instance" "consul3" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /tmp/scripts/start_consul.sh",
+      "cat <<EOF > /tmp/scripts/test.sh",
+      "${data.template_file.var.rendered}",
+      "EOF",
+      "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
   }
@@ -118,7 +124,6 @@ resource "aws_instance" "client1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.17.11"
   associate_public_ip_address = true
-  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-client1"
@@ -136,7 +141,10 @@ resource "aws_instance" "client1" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo bash /tmp/scripts/start_consul.sh",
+      "cat <<EOF > /tmp/scripts/test.sh",
+      "${data.template_file.var.rendered}",
+      "EOF",
+      "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/consul-template.sh",
       "sudo bash /tmp/scripts/conf-dnsmasq.sh",
       "sudo bash /tmp/scripts/check_nginx.sh",
