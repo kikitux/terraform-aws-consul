@@ -1,3 +1,2 @@
 #!/bin/bash
-DOMAIN="${DOMAIN}"
-DCNAME="${DCNAME}"
+echo $DCNAME - $DOMAIN
