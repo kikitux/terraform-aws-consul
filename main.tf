@@ -6,7 +6,7 @@ resource "aws_key_pair" "key" {
 data "template_file" "var" {
   template = "${file("${path.module}/var.sh")}"
 
-  var = {
+  vars = {
     DOMAIN = "${var.domain}"
     DCNAME = "${var.dcname}"
   }
@@ -20,6 +20,7 @@ resource "aws_instance" "consul1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.11"
   associate_public_ip_address = true
+  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-server1"
@@ -51,6 +52,7 @@ resource "aws_instance" "consul2" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.12"
   associate_public_ip_address = true
+  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-server2"
@@ -82,6 +84,7 @@ resource "aws_instance" "consul3" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.13"
   associate_public_ip_address = true
+  user_data                   = "${data.template_file.var.rendered}"
 
   tags {
     Name = "consul-server3"
