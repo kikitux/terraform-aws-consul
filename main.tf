@@ -7,8 +7,8 @@ data "template_file" "var" {
   template = "${file("var.sh")}"
 
   vars = {
-    DOMAIN = "${var.domain}"
-    DCNAME = "${var.dcname}"
+    DOMAIN = "$${var.domain}"
+    DCNAME = "$${var.dcname}"
   }
 }
 
