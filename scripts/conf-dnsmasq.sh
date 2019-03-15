@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 apt-get install dnsmasq -y
 cat << EOF > /etc/dnsmasq.d/10-consul
-server=/denislav/127.0.0.1#8600
+server=/consul/127.0.0.1#8600
 EOF
 
 sed -i -e 's/#resolv-file=/resolv-file=\/etc\/dnsmasq.d\/outside.conf/g' /usr/share/doc/dnsmasq-base/examples/dnsmasq.conf.example
