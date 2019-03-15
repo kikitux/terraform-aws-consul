@@ -4,18 +4,16 @@ resource "aws_key_pair" "key" {
 }
 
 data "template_file" "var" {
-  template = "${file("${path.module}/scripts/start_consul.sh")}"
+  template   = "${file("${path.module}/scripts/start_consul.sh")}"
   depends_on = ["aws_key_pair.key"]
 
   vars = {
-    DOMAIN = "${var.domain}"
-    DCNAME = "${var.dcname}"
-    LOG_LEVEL="debug"
-    SOFIA_SERVERS=["172.31.16.11","172.31.16.12","172.31.16.13"]
-    JOIN_SERVER="[\"172.\"${var.DC}\".16.11\"]"
-    SERVER_COUNT=3
-
-
+    DOMAIN        = "${var.domain}"
+    DCNAME        = "${var.dcname}"
+    LOG_LEVEL     = "debug"
+    SOFIA_SERVERS = "[\"172.31.16.11\", \"172.31.16.12\", \"172.31.16.13\"]"
+    JOIN_SERVER   = "[\"172.\"${var.DC}\".16.11\"]"
+    SERVER_COUNT  = 3
   }
 }
 
@@ -27,7 +25,6 @@ resource "aws_instance" "consul1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.11"
   associate_public_ip_address = true
-  
 
   tags {
     Name = "consul-server1"
