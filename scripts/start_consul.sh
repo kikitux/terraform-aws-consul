@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 export DEBIAN_FRONTEND=noninteractive
 set -x
-#export DOMAIN="consul"
-
-#export DCNAME="dc1"
-
-
-
 
 var2=$(hostname)
 mkdir -p /tmp/logs
