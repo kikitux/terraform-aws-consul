@@ -10,6 +10,7 @@ data "template_file" "var" {
   vars = {
     DOMAIN = "${var.domain}"
     DCNAME = "${var.dcname}"
+    DC     = "31"
   }
 }
 
