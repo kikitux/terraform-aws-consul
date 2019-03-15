@@ -11,6 +11,12 @@ data "template_file" "var" {
     DOMAIN = "${var.domain}"
     DCNAME = "${var.dcname}"
     DC     = "31"
+    LOG_LEVEL="debug"
+    SOFIA_SERVERS=["172.31.16.11","172.31.16.12","172.31.16.13"]
+    JOIN_SERVER="[\"172.${DC}.16.11\"]"
+    SERVER_COUNT=3
+
+
   }
 }
 

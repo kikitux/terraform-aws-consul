@@ -2,12 +2,11 @@
 export DEBIAN_FRONTEND=noninteractive
 set -x
 #export DOMAIN="consul"
-SERVER_COUNT=3
+
 #export DCNAME="dc1"
-DC=31
-LOG_LEVEL="debug"
-OFIA_SERVERS='["172.31.16.11","172.31.16.12","172.31.16.13"]'
-JOIN_SERVER="[\"172.${DC}.16.11\"]"
+
+
+
 
 var2=$(hostname)
 mkdir -p /tmp/logs
