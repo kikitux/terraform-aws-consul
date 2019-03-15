@@ -24,5 +24,5 @@ variable "domain" {
 }
 
 variable "dcname" {
-  default = "dc2"
+  default = "dc1"
 }
