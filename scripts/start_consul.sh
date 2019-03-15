@@ -67,7 +67,7 @@ create_server_conf () {
     {
         
         "server": true,
-        "node_name": "$${2}",
+        "node_name": "${${2}}",
         "bind_addr": "$${3}",
         "client_addr": "0.0.0.0",
         "bootstrap_expect": $${4},
