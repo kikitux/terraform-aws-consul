@@ -92,7 +92,7 @@ create_client_conf () {
             "node_name": "${var2}",
             "bind_addr": "${IP}",
             "client_addr": "0.0.0.0",
-            "retry_join": ${JOIN_SERVER},
+            "retry_join": [${JOIN_SERVER}],
             "log_level": "${LOG_LEVEL}",
             "data_dir": "/tmp/consul",
             "enable_script_checks": true,
