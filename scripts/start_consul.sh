@@ -71,7 +71,7 @@ create_server_conf () {
         "bind_addr": "${3}",
         "client_addr": "0.0.0.0",
         "bootstrap_expect": ${4},
-        "retry_join": ${5},
+        "retry_join": [${5}],
         "log_level": "${6}",
         "data_dir": "/tmp/consul",
         "enable_script_checks": true,
