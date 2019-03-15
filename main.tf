@@ -5,10 +5,11 @@ resource "aws_key_pair" "key" {
 
 data "template_file" "var" {
   template = "${file("var.sh")}"
+  depends_on = ["aws_key_pair.key"]
 
   vars = {
-    DOMAIN = "$${var.domain}"
-    DCNAME = "$${var.dcname}"
+    DOMAIN = "${var.domain}"
+    DCNAME = "${var.dcname}"
   }
 }
 
@@ -21,6 +22,7 @@ resource "aws_instance" "consul1" {
   private_ip                  = "172.31.16.11"
   associate_public_ip_address = true
   user_data                   = "${data.template_file.var.rendered}"
+  
 
   tags {
     Name = "consul-server1"
