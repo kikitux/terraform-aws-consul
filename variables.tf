@@ -18,3 +18,11 @@ variable "ami" {
     "server" = "ami-0085f11818f401bdf"
   }
 }
+
+variable "domain" {
+  default = "consul"
+}
+
+variable "dcname" {
+  default = "dc1"
+}

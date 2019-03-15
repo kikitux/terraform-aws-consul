@@ -3,6 +3,15 @@ resource "aws_key_pair" "key" {
   public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
+data "template_file" "var" {
+  template = "${file("${path.module}/var.tpl")}"
+
+  vars = {
+    DOMAIN = "${var.domain}"
+    DCNAME = "${var.dcname}"
+  }
+}
+
 resource "aws_instance" "consul1" {
   ami                         = "${var.ami["server"]}"
   instance_type               = "${var.instance_type}"
