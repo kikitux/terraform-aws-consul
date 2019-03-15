@@ -4,9 +4,9 @@ resource "aws_key_pair" "key" {
 }
 
 data "template_file" "var" {
-  template = "${file("${path.module}/var.sh")}"
+  template = "${file("var.sh")}"
 
-  var = {
+  vars = {
     DOMAIN = "${var.domain}"
     DCNAME = "${var.dcname}"
   }
