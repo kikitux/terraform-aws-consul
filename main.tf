@@ -20,6 +20,7 @@ resource "aws_instance" "consul1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.11"
   associate_public_ip_address = true
+  depends_on                  = ["template_file.var"]
 
   tags {
     Name = "consul-server1"
@@ -51,6 +52,7 @@ resource "aws_instance" "consul2" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.12"
   associate_public_ip_address = true
+  depends_on                  = ["template_file.var"]
 
   tags {
     Name = "consul-server2"
@@ -82,6 +84,7 @@ resource "aws_instance" "consul3" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.16.13"
   associate_public_ip_address = true
+  depends_on                  = ["template_file.var"]
 
   tags {
     Name = "consul-server3"
@@ -113,6 +116,7 @@ resource "aws_instance" "client1" {
   vpc_security_group_ids      = "${var.security_group_id}"
   private_ip                  = "172.31.17.11"
   associate_public_ip_address = true
+  depends_on                  = ["template_file.var"]
 
   tags {
     Name = "consul-client1"
