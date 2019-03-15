@@ -78,9 +78,9 @@ resource "aws_instance" "consul2" {
 
   provisioner "remote-exec" {
     inline = [
-      "cat <<EOF > /tmp/scripts/test.sh",
+      "cat <<EOT > /tmp/scripts/test.sh",
       "${data.template_file.var.rendered}",
-      "EOF",
+      "EOT",
       "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
@@ -112,9 +112,9 @@ resource "aws_instance" "consul3" {
 
   provisioner "remote-exec" {
     inline = [
-      "cat <<EOF > /tmp/scripts/test.sh",
+      "cat <<EOT > /tmp/scripts/test.sh",
       "${data.template_file.var.rendered}",
-      "EOF",
+      "EOT",
       "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
@@ -146,9 +146,9 @@ resource "aws_instance" "client1" {
 
   provisioner "remote-exec" {
     inline = [
-      "cat <<EOF > /tmp/scripts/test.sh",
+      "cat <<EOT > /tmp/scripts/test.sh",
       "${data.template_file.var.rendered}",
-      "EOF",
+      "EOT",
       "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/consul-template.sh",
       "sudo bash /tmp/scripts/conf-dnsmasq.sh",
