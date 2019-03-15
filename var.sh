@@ -1,0 +1,2 @@
+DOMAIN="${DOMAIN}"
+DCNAME="${DCNAME}"
