@@ -62,21 +62,21 @@ EOF
 # Function that creates the conf file for the Consul servers. It requires 8 arguments. All of them are defined in the beginning of the script.
 # Arguments 5 and 6 are the SOFIA_SERVERS and BTG_SERVERS and they are twisted depending in which DC you are creating the conf file.
 create_server_conf () {
-    cat << EOF > /etc/consul.d/config_${1}.json
+    cat << EOF > /etc/consul.d/config_$${1}.json
     
     {
         
         "server": true,
-        "node_name": "${2}",
-        "bind_addr": "${3}",
+        "node_name": "$${2}",
+        "bind_addr": "$${3}",
         "client_addr": "0.0.0.0",
-        "bootstrap_expect": ${4},
-        "retry_join": [${5}],
-        "log_level": "${6}",
+        "bootstrap_expect": $${4},
+        "retry_join": [$${5}],
+        "log_level": "$${6}",
         "data_dir": "/tmp/consul",
         "enable_script_checks": true,
-        "domain": "${7}",
-        "datacenter": "${1}",
+        "domain": "$${7}",
+        "datacenter": "$${1}",
         "ui": true
 
     }
@@ -89,15 +89,15 @@ create_client_conf () {
     cat << EOF > /etc/consul.d/consul_client.json
 
         {
-            "node_name": "${1}",
-            "bind_addr": "${2}",
+            "node_name": "$${1}",
+            "bind_addr": "$${2}",
             "client_addr": "0.0.0.0",
-            "retry_join": ${3},
-            "log_level": "${4}",
+            "retry_join": $${3},
+            "log_level": "$${4}",
             "data_dir": "/tmp/consul",
             "enable_script_checks": true,
-            "domain": "${5}",
-            "datacenter": "${6}",
+            "domain": "$${5}",
+            "datacenter": "$${6}",
             "ui": true
         }
 
