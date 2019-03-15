@@ -44,9 +44,9 @@ resource "aws_instance" "consul1" {
 
   provisioner "remote-exec" {
     inline = [
-      "cat <<EOF > /tmp/scripts/test.sh",
+      "cat <<EOT > /tmp/scripts/test.sh",
       "${data.template_file.var.rendered}",
-      "EOF",
+      "EOT",
       "sudo bash /tmp/scripts/test.sh",
       "sudo bash /tmp/scripts/keyvalue.sh",
     ]
