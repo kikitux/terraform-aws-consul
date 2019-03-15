@@ -62,21 +62,21 @@ EOF
 # Function that creates the conf file for the Consul servers. It requires 8 arguments. All of them are defined in the beginning of the script.
 # Arguments 5 and 6 are the SOFIA_SERVERS and BTG_SERVERS and they are twisted depending in which DC you are creating the conf file.
 create_server_conf () {
-    cat << EOF > /etc/consul.d/config_$${1}.json
+    cat << EOF > /etc/consul.d/config_${DCNAME}.json
     
     {
         
         "server": true,
-        "node_name": "${${2}}",
-        "bind_addr": "$${3}",
+        "node_name": "${var2}",
+        "bind_addr": "${IP}",
         "client_addr": "0.0.0.0",
-        "bootstrap_expect": $${4},
-        "retry_join": [$${5}],
-        "log_level": "$${6}",
+        "bootstrap_expect": ${SERVER_COUNT},
+        "retry_join": [${SOFIA_SERVERS}],
+        "log_level": "${LOG_LEVEL}",
         "data_dir": "/tmp/consul",
         "enable_script_checks": true,
-        "domain": "$${7}",
-        "datacenter": "$${1}",
+        "domain": "${DOMAIN}",
+        "datacenter": "${DCNAME}",
         "ui": true
 
     }
@@ -89,15 +89,15 @@ create_client_conf () {
     cat << EOF > /etc/consul.d/consul_client.json
 
         {
-            "node_name": "$${1}",
-            "bind_addr": "$${2}",
+            "node_name": "${var2}",
+            "bind_addr": "${IP}",
             "client_addr": "0.0.0.0",
-            "retry_join": $${3},
-            "log_level": "$${4}",
+            "retry_join": ${JOIN_SERVER},
+            "log_level": "${LOG_LEVEL}",
             "data_dir": "/tmp/consul",
             "enable_script_checks": true,
-            "domain": "$${5}",
-            "datacenter": "$${6}",
+            "domain": "${DOMAIN}",
+            "datacenter": "${DCNAME}",
             "ui": true
         }
 
@@ -108,7 +108,7 @@ init_consul ${LOG_LEVEL} ${var2}
 if [[ "${var2}" =~ "ip-172-31-16" ]]; then
     killall consul
 
-    create_server_conf ${DCNAME} ${var2} ${IP} ${SERVER_COUNT} ${SOFIA_SERVERS} ${LOG_LEVEL} ${DOMAIN}
+    create_server_conf
 
     sudo systemctl enable consul >/dev/null
    
@@ -117,7 +117,7 @@ if [[ "${var2}" =~ "ip-172-31-16" ]]; then
 else
     if [[ "${var2}" =~ "ip-172-31-17" ]]; then
         killall consul
-        create_client_conf ${var2} ${IP} ${JOIN_SERVER} ${LOG_LEVEL} ${DOMAIN} ${DCNAME}
+        create_client_conf
     fi
    
     sudo systemctl enable consul >/dev/null
