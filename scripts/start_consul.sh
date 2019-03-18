@@ -2,7 +2,7 @@
 export DEBIAN_FRONTEND=noninteractive
 set -x
 
-var2=$(hostname)
+#var2=$(hostname)
 mkdir -p /tmp/logs
 mkdir -p /etc/consul.d
 
@@ -24,7 +24,7 @@ init_consul () {
     LOG="consul.log"
     fi
 
-    IP=$(hostname -I)
+    #IP=$(hostname -I)
 
     sudo useradd --system --home /etc/consul.d --shell /bin/false consul
     sudo chown --recursive consul:consul /etc/consul.d
