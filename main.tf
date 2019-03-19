@@ -11,8 +11,6 @@ data "template_file" "var" {
     DOMAIN        = "${var.domain}"
     DCNAME        = "${var.dcname}"
     LOG_LEVEL     = "debug"
-    SOFIA_SERVERS = "\"172.31.16.11\",\"172.31.16.12\",\"172.31.16.13\""
-    JOIN_SERVER   = "\"172.${var.DC}.16.11\""
     SERVER_COUNT  = 3
     var2          = "$(hostname)"
     IP            = "$(hostname -I)"
@@ -30,6 +28,7 @@ resource "aws_instance" "consul1" {
 
   tags {
     Name = "consul-server1"
+    consul_join = "approved"
   }
 
   connection {
