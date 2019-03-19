@@ -63,6 +63,7 @@ resource "aws_instance" "consul2" {
 
   tags {
     Name = "consul-server2"
+    consul_join = "approved"
   }
 
   connection {
@@ -97,6 +98,7 @@ resource "aws_instance" "consul3" {
 
   tags {
     Name = "consul-server3"
+    consul_join = "approved"
   }
 
   connection {
@@ -131,6 +133,7 @@ resource "aws_instance" "client1" {
 
   tags {
     Name = "consul-client1"
+    consul_join = "approved"
   }
 
   connection {
