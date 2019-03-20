@@ -1,3 +1,5 @@
+# Below are resources needed for enabling the consul auto-join function. 
+# EC2 instaces need to have iam_instance_profile with the below policy and set of rules so each EC2 can read the metadata in order to find the private_ips based on a specific tag key/value.
 data "aws_iam_policy_document" "assume_role" {
 
   statement {
@@ -51,11 +53,13 @@ resource "aws_iam_instance_profile" "consul" {
   role        = "${aws_iam_role.consul.name}"
 }
 
-
+# Resource needed in order to be able to SSH and provision the EC2 instances
 resource "aws_key_pair" "key" {
   key_name   = "key"
   public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
+
+# Data source that is needed in order to dinamicly publish values of variables into the script that is creating Consul configuration files and starting it.
 
 data "template_file" "var" {
   template   = "${file("${path.module}/scripts/start_consul.sh")}"
@@ -71,6 +75,7 @@ data "template_file" "var" {
   }
 }
 
+# Below are the 3 Consul servers and 1 consul client.
 resource "aws_instance" "consul1" {
   ami                         = "${var.ami["server"]}"
   instance_type               = "${var.instance_type}"
@@ -217,6 +222,7 @@ resource "aws_instance" "client1" {
   }
 }
 
+# Outputs the instances public ips and ids.
 output "server_id1" {
   value = "${aws_instance.consul1.id}"
 }

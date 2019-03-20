@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-# Check for nginx
-
 export HN=$(hostname)
 var2=$(hostname)
 # Create script check

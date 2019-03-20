@@ -7,7 +7,7 @@ mkdir -p /etc/consul.d
 
 
 # Function used for initialize Consul. Requires 2 arguments: Log level and the hostname assigned by the respective variables.
-# If no log level is specified in the Vagrantfile, then default "info" is used.
+# If no log level is specified in the main.tf, then default "info" is used.
 init_consul () {
     killall consul
 
@@ -54,10 +54,7 @@ init_consul () {
 EOF
 }
 
-# Function for creating the gossip encryption conf file. Requires 1 argument: the hostname . This function is always executed only once on the 1st server.
-
-# Function that creates the conf file for the Consul servers. It requires 8 arguments. All of them are defined in the beginning of the script.
-# Arguments 5 and 6 are the SOFIA_SERVERS and BTG_SERVERS and they are twisted depending in which DC you are creating the conf file.
+# Function that creates the conf file for the Consul servers. 
 create_server_conf () {
     cat << EOF > /etc/consul.d/config_${DCNAME}.json
     
@@ -80,8 +77,7 @@ create_server_conf () {
 EOF
 }
 
-# Function that creates the conf file for Consul clients. It requires 6 arguments and they are defined in the beginning of the script.
-# 3rd argument shall be the JOIN_SERVER as it points the client to which server contact for cluster join.
+# Function that creates the conf file for Consul clients. 
 create_client_conf () {
     cat << EOF > /etc/consul.d/consul_client.json
 
