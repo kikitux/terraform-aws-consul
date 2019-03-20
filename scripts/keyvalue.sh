@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Code used to insert a key/value into the KV store of Consul
 export DEBIAN_FRONTEND=noninteractive
 set -x
 
